@@ -27,18 +27,18 @@ public class Crossword {
         System.out.println();
     }
 
-    static boolean solution(char[][] arr, String[] word, int vidx){
-        if (vidx == word.length) {
+    static boolean solution(char[][] arr, String[] word, int num){
+        if (num == word.length) {
             print(arr);
             return true;
         }
-        String words = word[vidx];
+        String words = word[num];
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[0].length; j++) {
                 if (arr[i][j] == '_' || arr[i][j] == words.charAt(0)) {
                     if (canPlaceHorizontally(arr, words, i, j)) {
                         boolean[] wePlaced = placeWordHorizontally(arr, words, i, j);
-                        if (solution(arr, word, vidx + 1)) {
+                        if (solution(arr, word, num + 1)) {
                             return true;
                         }
                         unPlaceWordHorizontally(arr, wePlaced, i, j);
@@ -46,7 +46,7 @@ public class Crossword {
 
                     if (canPlaceVertically(arr, words, i, j)) {
                         boolean[] wePlaced = placeWordVertically(arr, words, i, j);
-                        if (solution(arr, word, vidx + 1)) {
+                        if (solution(arr, word, num + 1)) {
                             return true;
                         }
                         unPlaceWordVertically(arr, wePlaced, i, j);
